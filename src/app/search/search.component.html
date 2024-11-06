@@ -1,12 +1,12 @@
 
-<form clrForm clrLayout="horizontal" [formGroup]="weathersearchform" (ngSubmit)="onSubmit()" >
+<form clrForm clrLayout="horizontal" #weathersearchform="ngForm" (ngSubmit)="onSubmit(weathersearchform)" >
     <div class="clr-row">
         <div class="clr-col-12 clr-col-md-3">
             <clr-datalist-container>
                 <label  class="clr-col-12 clr-col-md-2"  >Country</label>
-                <input clrDatalistInput placeholder="Select" id="country1"  name="country2" formControlName="frmSrchCountry" class="clr-col-12 clr-col-md-8"  />
-                <clr-control-error *ngIf="weathersearchform.get('frmSrchCountry')?.invalid && weathersearchform.get('frmSrchCountry')?.touched" >
-                    <span *ngIf="weathersearchform.get('frmSrchCountry')?.errors?.['required']"> This field is required!</span>
+                <input clrDatalistInput placeholder="Select" id="country1" required  name="frmSrchCountry" [(ngModel)]="weathersearch.frmSrchCountry" #frmSrchCountry="ngModel" class="clr-col-12 clr-col-md-8"  />
+                <clr-control-error *ngIf="frmSrchCountry?.invalid && frmSrchCountry?.touched" >
+                    <span *ngIf="frmSrchCountry?.errors?.['required']"> This field is required!</span>
                     </clr-control-error>
                 <datalist>
                     <option *ngFor="let item of countries" [value]="item.countryName">{{item.countryName}}</option>
@@ -18,7 +18,7 @@
         <div  class="clr-col-12 clr-col-md-3">
               <clr-datalist-container>
                 <label for="weatherType" class="clr-col-12 clr-col-md-4">Weather&nbsp;Type</label>
-                <input class="clr-col-12 clr-col-md-8" clrDatalistInput id="weatherType"  name="weatherTypenm" placeholder="Select"  formControlName="frmSrchWeatherType" />
+                <input class="clr-col-12 clr-col-md-8" clrDatalistInput id="weatherType"  name="weatherTypenm" [(ngModel)]="weathersearch.weatherTypenm" #weatherTypenm="ngModel" placeholder="Select" />
                 <datalist>
                     <option *ngFor="let item of weatherTypes" [value]="item.weatherName">{{item.weatherName}}</option>
                   </datalist>
@@ -29,13 +29,13 @@
         <div class="clr-col-12 clr-col-md-3 ">
             <clr-date-container>
                 <label for="startDatepickrnm" class="clr-col-12 clr-col-md-3">Start&nbsp;Date</label>
-                <input class="clr-col-12 clr-col-md-9" type="date"   clrDate id="startDatepickrnm" name="startDatepickrnm" formControlName="frmSrchStDt" >
+                <input class="clr-col-12 clr-col-md-9" type="date"   clrDate id="startDatepickrnm" name="startDatepickrnm"#frmSrchStDt="ngModel" [(ngModel)]="weathersearch.frmSrchStDt" >
             </clr-date-container>
         </div>
         <div class="clr-col-12 clr-col-md-3">
             <clr-date-container>
                 <label for="endDatepickrnm" class="clr-col-12 clr-col-md-3">End&nbsp;Date</label>
-                <input class="clr-col-12 clr-col-md-9" type="date"   clrDate id="endDatepickrnm" name="endDatepickrnm"  formControlName="frmSrchEndDt" >
+                <input class="clr-col-12 clr-col-md-9" type="date"   clrDate id="endDatepickrnm" name="endDatepickrnm" #frmSrchEndDt="ngModel" [(ngModel)]="weathersearch.frmSrchEndDt" >
             </clr-date-container>
         </div>
     </div>
@@ -43,7 +43,7 @@
         <div class="clr-col-12 clr-col-md-3">
             <clr-input-container>
                 <label for="location" class="clr-col-12 clr-col-md-2"><div>Location</div></label>
-                <input class="clr-col-12 clr-col-md-8" clrInput type="text" id="location"  name="location"  formControlName="frmSrchLocation" />
+                <input class="clr-col-12 clr-col-md-8" clrInput type="text" id="location"  name="location" #frmSrchLocation="ngModel" [(ngModel)]="weathersearch.frmSrchLocation" />
               </clr-input-container>
         </div>
         <div class="clr-col-12 clr-col-md-9"> </div>

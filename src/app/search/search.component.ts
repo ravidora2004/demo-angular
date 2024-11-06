@@ -2,7 +2,6 @@ import { Component,ViewChild } from '@angular/core';
 import { Country,WeatherEvent,WeatherType } from '../dtos/dtos';
 import { CommonService } from '../services/common.service';
 import { AddeventComponent } from '../addevent/addevent.component';
-import { FormBuilder,FormGroup,Validators } from '@angular/forms';
 import { Result } from '../models/commonmodels';
 @Component({
   selector: 'app-search',
@@ -18,26 +17,24 @@ export class SearchComponent {
   //weatherEvents: WeatherEvent[]=[];
   countries : Country[]=[];
   weatherTypes : WeatherType[]=[];
-  weathersearchform! :FormGroup;
+  weathersearch:any = {
+    frmSrchCountry:'',
+    frmSrchWeatherType:'',
+    frmSrchStDt:'',
+    frmSrchEndDt:'',
+    frmSrchLocation:'',
+  };
   weatherResult ={} as Result;
   filterEnabled :boolean=true;
- constructor(private frmbuilder :FormBuilder,private commonService:CommonService){
+ constructor(private commonService:CommonService){
   this.filterEnabled=true;
-  this.weathersearchform = this.frmbuilder.group({
-    frmSrchCountry:['',[]],
-    frmSrchWeatherType:['',[]],
-    frmSrchStDt:['',[]],
-    frmSrchEndDt:['',[]],
-    frmSrchLocation:['',[]],
-  });
  }
  reset():void{
-  this.weathersearchform.reset();
+  this.weathersearch.reset();
   this.weatherEvents=[];
   this.weatherResult={} as Result;
  }
  ngOnInit(){
-  
   
   this.commonService.getallCountries().subscribe((results:any)=>{
   
@@ -54,7 +51,8 @@ export class SearchComponent {
   });
   
 }
-onSubmit():void{
+onSubmit(_form:any):void{
+  const formValue = _form.value; // use this value to pass to the  service and get data
   this.commonService.getallWeatherEvents().subscribe((result:Result)=>{
     this.weatherResult  = result;
     this.weatherEvents = result.data;
