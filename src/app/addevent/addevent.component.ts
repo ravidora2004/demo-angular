@@ -1,4 +1,4 @@
-import { Component,OnInit } from '@angular/core';
+import { Component,Input,OnInit } from '@angular/core';
 import { WeatherEvent,WeatherEventRequest } from '../dtos/dtos';
 import { FormBuilder,FormGroup,Validators } from '@angular/forms';
 import { CommonService } from '../services/common.service';
@@ -9,6 +9,16 @@ import { CommonService } from '../services/common.service';
   styleUrl: './addevent.component.css',
 })
 export class AddeventComponent  implements OnInit {
+  @Input() set formData(value:any){
+    this.weatheraddform.patchValue({
+      frmWeatherEvent: value.weatherEvent,
+      frmCountry: value.country,
+      frmLocation: value.location,
+      frmStartDate: new Date(value.startDate),
+      frmEndDate: new Date(value.endDate),
+      frmDescription: value.description,
+    })
+  }
   weatherTypes : any;
   countries : any;
   input:any;

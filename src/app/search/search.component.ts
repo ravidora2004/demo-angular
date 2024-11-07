@@ -26,9 +26,17 @@ export class SearchComponent {
   };
   weatherResult ={} as Result;
   filterEnabled :boolean=true;
+
+  gridData:any = null;
  constructor(private commonService:CommonService){
   this.filterEnabled=true;
  }
+
+ editEntry(entry:any){
+  this.gridData = entry;
+  this.openModal()
+ }
+
  reset():void{
   this.weathersearch.reset();
   this.weatherEvents=[];

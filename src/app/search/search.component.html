@@ -83,7 +83,7 @@
               <clr-dg-cell>
                 <div class="button-wrapper">
                     
-                    <span class="cellContainer">
+                    <span class="cellContainer" (click)="editEntry(weather)">
                         <cds-icon shape="pencil" solid="true" style="display: block;"></cds-icon>
                     </span>
                     <span class="cellContainer">
@@ -104,4 +104,4 @@
           </clr-datagrid>
     </div>
     </div>
-   <app-addevent/>
+   <app-addevent [formData]="gridData"/>
