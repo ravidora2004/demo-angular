@@ -37,6 +37,10 @@ export class SearchComponent {
   this.openModal()
  }
 
+ handleFormClose(event:any){
+  this.gridData = event;
+ }
+
  reset():void{
   this.weathersearch.reset();
   this.weatherEvents=[];

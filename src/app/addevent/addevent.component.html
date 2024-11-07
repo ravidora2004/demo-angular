@@ -1,5 +1,5 @@
   <clr-modal [(clrModalOpen)]="open">
-    <h3 class="modal-title">New Weather Event</h3>
+    <h3 class="modal-title">{{eventType}}Weather Event</h3>
     <div class="modal-body">
         <form clrForm [formGroup]="weatheraddform" (ngSubmit)="onSubmit()">
             <div class="clr-row">

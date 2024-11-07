@@ -104,4 +104,4 @@
           </clr-datagrid>
     </div>
     </div>
-   <app-addevent [formData]="gridData"/>
+   <app-addevent [formData]="gridData" (closeEvent)="handleFormClose($event)" />

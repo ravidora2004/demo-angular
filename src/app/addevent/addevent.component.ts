@@ -1,4 +1,4 @@
-import { Component,Input,OnInit } from '@angular/core';
+import { Component,EventEmitter,HostListener,Input,OnInit, Output } from '@angular/core';
 import { WeatherEvent,WeatherEventRequest } from '../dtos/dtos';
 import { FormBuilder,FormGroup,Validators } from '@angular/forms';
 import { CommonService } from '../services/common.service';
@@ -10,17 +10,32 @@ import { formatDate } from '@angular/common';
   styleUrl: './addevent.component.css',
 })
 export class AddeventComponent  implements OnInit {
+  @Output() closeEvent = new EventEmitter()
   @Input() set formData(value:any){
-    this.weatheraddform.patchValue({
-      frmWeatherEvent: value.weatherEvent,
-      frmCountry: value.country,
-      frmLocation: value.location,
-      frmStartDate: formatDate(new Date(value.startDate),'MM/dd/YYYY','EN-US'),
-      frmEndDate: formatDate(new Date(value.endDate),'MM/dd/YYYY','EN-US'),
-      frmDescription: value.description,
-    })
+    if(value){
+      this.eventType = 'Edit '
+      this.weatheraddform.patchValue({
+        frmWeatherEvent: value.weatherEvent,
+        frmCountry: value.country,
+        frmLocation: value.location,
+        frmStartDate: formatDate(new Date(value.startDate),'MM/dd/YYYY','EN-US'),
+        frmEndDate: formatDate(new Date(value.endDate),'MM/dd/YYYY','EN-US'),
+        frmDescription: value.description,
+      })
+    }else{
+      this.eventType = 'New ';
+      this.weatheraddform.reset()
+    }
   }
+  @HostListener('document:keydown.escape', ['$event'])
+  onEscape(event: KeyboardEvent) {
+    // Custom logic when Escape key is pressed
+    this.open = false;
+    this.closeEvent.emit(null)
+  }
+  
   weatherTypes : any;
+  eventType:string = 'New ';
   countries : any;
   input:any;
   weatherEvent={} as WeatherEvent;
@@ -76,6 +91,7 @@ ngOnInit(): void {
   }
   closeModal(): void {
     this.open = false;
+    this.closeEvent.emit()
   }
 
   onSubmit():void{
