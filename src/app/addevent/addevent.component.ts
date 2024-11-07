@@ -2,6 +2,7 @@ import { Component,Input,OnInit } from '@angular/core';
 import { WeatherEvent,WeatherEventRequest } from '../dtos/dtos';
 import { FormBuilder,FormGroup,Validators } from '@angular/forms';
 import { CommonService } from '../services/common.service';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-addevent',
@@ -14,8 +15,8 @@ export class AddeventComponent  implements OnInit {
       frmWeatherEvent: value.weatherEvent,
       frmCountry: value.country,
       frmLocation: value.location,
-      frmStartDate: new Date(value.startDate),
-      frmEndDate: new Date(value.endDate),
+      frmStartDate: formatDate(new Date(value.startDate),'MM/dd/YYYY','EN-US'),
+      frmEndDate: formatDate(new Date(value.endDate),'MM/dd/YYYY','EN-US'),
       frmDescription: value.description,
     })
   }
@@ -57,7 +58,7 @@ ngOnInit(): void {
       frmReasons:['',[Validators.required]],
       frmCountry:['',[Validators.required]],
       frmLocation:['',[Validators.required]],
-      frmStartDate:['',[Validators.required]],
+      frmStartDate:[new Date(),[Validators.required]],
       frmEndDate:['',[Validators.required]],
       frmDescription:['',[Validators.required]],
       frmOtherDescription:[''],
