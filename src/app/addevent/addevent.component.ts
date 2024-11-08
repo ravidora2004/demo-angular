@@ -10,7 +10,6 @@ import { formatDate } from '@angular/common';
   styleUrl: './addevent.component.css',
 })
 export class AddeventComponent  implements OnInit {
-  @Output() closeEvent = new EventEmitter()
   @Input() set formData(value:any){
     if(value){
       this.eventType = 'Edit '
@@ -31,7 +30,6 @@ export class AddeventComponent  implements OnInit {
   onEscape(event: KeyboardEvent) {
     // Custom logic when Escape key is pressed
     this.open = false;
-    this.closeEvent.emit(null)
   }
   
   weatherTypes : any;
@@ -62,8 +60,9 @@ ngOnInit(): void {
     
   });
 }
-  openModal():void {
+  openModal(mode ='add'):void {
     this.open =true;
+    this.eventType = mode === 'add' ? 'Add':'Edit'
     //this.loadWeatherform();
   }
    loadWeatherform() {
@@ -91,11 +90,9 @@ ngOnInit(): void {
   }
   closeModal(): void {
     this.open = false;
-    this.closeEvent.emit()
   }
 
   onSubmit():void{
-    alert("hi");
     if(this.weatheraddform.valid){
       
  alert(this.weatheraddform.value)
