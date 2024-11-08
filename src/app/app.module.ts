@@ -16,6 +16,7 @@ import { QtcFooterComponent } from './qtc-footer/qtc-footer.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AddeventComponent } from './addevent/addevent.component';
 import { WeatherEventGridComponent } from './weather-event-grid/weather-event-grid.component';
+import { FormLibModule } from './form-builder/form-lib/form-lib.module';
 
 loadCoreIconSet();
 
@@ -35,7 +36,8 @@ loadCoreIconSet();
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormLibModule
   ],
   providers: [provideAnimations()],
   bootstrap: [AppComponent]
