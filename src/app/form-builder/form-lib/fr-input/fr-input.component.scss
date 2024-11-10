@@ -4,7 +4,7 @@
 
   input {
     height: 2.3rem;
-    padding: 0.4rem;
+    // padding: 0.4rem;
     width: 100%;
   }
 
@@ -25,8 +25,8 @@
   textarea,
   select {
     font-size: 1rem;
-    border: 1px solid #ced4da;
-    border-radius: 0.25rem;
+    // border: 1px solid #ced4da;
+    // border-radius: 0.25rem;
     background-color: #fff;
     transition: all 0.2s ease-in-out;
     position: relative;
@@ -34,14 +34,14 @@
 
     &:required {
       outline: none;
-      border-color: #bc86fe;
-      box-shadow: 0 0 0 0.1rem rgba(13, 110, 253, 0.25);
+      // border-color: #bc86fe;
+      // box-shadow: 0 0 0 0.1rem rgba(13, 110, 253, 0.25);
     }
 
     &:focus {
       outline: none;
-      border-color: #86b7fe;
-      box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+      // border-color: #86b7fe;
+      // box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
     }
 
     &:disabled {
@@ -55,7 +55,7 @@
     top: 50%;
     left: 0.75rem;
     transform: translateY(-50%);
-    font-size: 1rem;
+    font-size: .8rem;
     color: #6c757d;
     pointer-events: none;
     transition: all 0.2s ease-in-out;

@@ -84,7 +84,7 @@ export class FrInputComponent implements OnInit {
   @Input() showDebugInfo: boolean = true;
 
 
-  @Input() theme: string = 'floating' ;
+  @Input() theme: string = '' ;
   @Input() themeSideBySideLabel: boolean = true;  
   @Input() inputContainerClass?: string ;
 //showKey
