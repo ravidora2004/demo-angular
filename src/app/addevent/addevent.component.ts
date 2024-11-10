@@ -32,7 +32,7 @@ export class AddeventComponent implements OnInit {
     // Custom logic when Escape key is pressed
     this.open = false;
   }
-
+  states:Array<any>=[{name:'Alaska', value:'al'}]
   weatherTypes: any;
   eventType: string = 'New ';
   countries: any;

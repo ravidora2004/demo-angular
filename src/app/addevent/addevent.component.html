@@ -43,8 +43,8 @@
             <div class="clr-col-12 clr-col-md-8 req">
                 <clr-input-container>
                     <label for="otherDescription" class="clr-col-12 clr-col-md-6">If Other </label>
-                    <input class="clr-col-12 clr-col-md-6" placeholder="" [required]="isOtherDescriptionRequired" clrInput  name="otherDescription" name="frmOtherDescription" #frmOtherDescription="ngModel" [(ngModel)]="weatherAdd.frmOtherDescription"  />
-                    <clr-control-error *ngIf="frmOtherDescription?.invalid && frmDescription?.touched" >
+                    <input class="clr-col-12 clr-col-md-6" placeholder="" [required]="isOtherDescriptionRequired" clrInput name="frmOtherDescription" #frmOtherDescription="ngModel" [(ngModel)]="weatherAdd.frmOtherDescription"  />
+                    <clr-control-error *ngIf="frmOtherDescription?.invalid && frmOtherDescription?.touched" >
                         <span *ngIf="frmOtherDescription?.errors?.['required']"> This field is required!</span>
                         </clr-control-error>
                   </clr-input-container>
@@ -66,6 +66,26 @@
             </clr-datalist-container>
         </div>
     </div>
+    <!-- State -->
+    <div class="clr-row" *ngIf="weatherAdd?.frmCountry?.toLowerCase() === 'usa'">
+        <div class="clr-col-12 clr-col-md-8 combo-box req">
+            <clr-combobox-container>
+                <label class="clr-col-12 clr-col-md-6">States</label>
+                <clr-combobox class="clr-col-12 clr-col-md-6" [(ngModel)]="weatherAdd.state" clrMulti="true" name="frmState" #frmState="ngModel" [required]="weatherAdd.frmCountry.toLowerCase() === 'usa'">
+                  <ng-container *clrOptionSelected="let selected">
+                    {{ selected?.name }}
+                  </ng-container>
+                  <clr-options>
+                    <clr-option *clrOptionItems="let state of states; field: 'name'" [clrValue]="state">
+                      {{ state.name }}
+                    </clr-option>
+                  </clr-options>
+                </clr-combobox>
+                <clr-control-error *ngIf="frmState?.invalid && frmState?.touched">This field is required</clr-control-error>
+              </clr-combobox-container>
+        </div>
+    </div>
+
     <div class="clr-row">
         <div class="clr-col-12 clr-col-md-8 req">
             <clr-input-container>
