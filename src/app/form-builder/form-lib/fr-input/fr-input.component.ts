@@ -45,11 +45,8 @@ export class FrInputComponent implements OnInit {
   @Input() noOfcols: string = '6';
   
   getAlignmentClass():string {
-    if (this.alignment){
-      return this.alignment;
-    }
-    return 'floating';
-
+    const classes = [ (this.alignment ?? 'floating'), this.layoutSetting, this.cssClass, this.containerClass];
+    return classes.filter(Boolean).join(' ');
   }
   
   hasValueClass():string{
@@ -76,7 +73,7 @@ export class FrInputComponent implements OnInit {
   @Input() validations?: ValidationRule[] = [];
   @Input() cssClass?: string;
   @Input() styles?: { [key: string]: string };
-  @Input() labelClass?: string;
+  @Input() labelClass?: string = 'clr-col-12 clr-col-md-6';
   @Input() inputClass?: string;
   @Input() disabled: boolean = false;
   @Input() required?: boolean  = true;

@@ -1,21 +1,14 @@
 <form
   #myForm="ngForm"
+  clrForm
   class="fr-dynamic-form clr-row"
   [ngClass]="[config.layout || 'standard', config.cssClass || '']"
 >
-<!--[alignment] ="config.alignment || field.alignment"
--->
   <div class="clr-row">
     <ng-container *ngFor="let field of fieldsVisible">
       <fr-input
-        [class]="[
-          field.cssHostClass,
-          field.cssHostClass2,
-          field.cssHostClass3,
-          field.cssClass
-        ]"
+        [class]="getClasses(field)"
         [alignment] =" config.alignment??'right' "
-        
         [controlType]="field.type"
         [name]="field.name"
         [vm]="vm"

@@ -1,44 +1,86 @@
-<div [class]="[getAlignmentClass(), layoutSetting, cssClass, containerClass]">
-  <label [for]="name" [class]="[hasValueClass(), labelClass]" *ngIf="label">
-    {{ label }}&nbsp;<span *ngIf="required && (!getValue()) ">*</span>: &nbsp;
-  </label>
+<div [class]="[getAlignmentClass(), 'clr-row']">
+  <div class="clr-col-12 clr-col-md-8">
+    <ng-container [ngSwitch]="controlType">
+      <clr-datalist-container *ngSwitchCase="'select'">
+        <label for="vacode" [class]="labelClass" *ngIf="label">
+          {{ label }}<span *ngIf="required && (!getValue()) ">*</span>
+        </label>
+        <input class="clr-col-12 clr-col-md-6" clrDatalistInput id="vacode" placeholder="Select"
+          #ctrl="ngModel"
+          [name]="name"
+          [class]="[hasValueClass(), inputClass]"
+          (blur)="onBlur()"
+          (focus)="onFocus()"
+          (change)="onInputChange($event)"
+          [(ngModel)]="model"
+        />
+        <clr-control-error *ngIf="ctrl && ctrl?.touched && ctrl?.invalid">
+          <div *ngIf="loaded ">
+            <span class="clr-subtext error-messages">
+              <div *ngIf="ctrl?.errors?.['required']">
+                {{label}} is required
+              </div>
+              <div *ngIf="ctrl &&  ctrl?.errors?.['minlength']">
+                Input must be at least {{ctrl.errors?.['minlength']?.requiredLength}} characters long. Current length:
+                {{ctrl.errors?.['minlength']?.actualLength}}
+              </div>
+              <div *ngIf="ctrl &&  ctrl?.errors?.['maxlength']">
+                Max length
+              </div>
+            </span>
+          </div>
+        </clr-control-error>
+        <datalist>
+          <option *ngFor="let option of options" [value]="option.key"> {{ option.value }}</option>
+        </datalist>
+      </clr-datalist-container>
 
-  <ng-container [ngSwitch]="controlType">
-    <select *ngSwitchCase="'select'" #ctrl="ngModel" [name]="name" [class]="[hasValueClass(), inputClass]"
-      (blur)="onBlur()" (focus)="onFocus()" (change)="onInputChange($event)" [(ngModel)]="model">
-      <option value=""></option>
-      <option *ngFor="let option of options" [value]="option.key">
-        {{ option.value }}
-      </option>
-    </select>
+      <!-- If the input type is a date picker -->
+      <clr-date-container *ngSwitchCase="'datepicker'">
+        <label for="vacode" [class]="labelClass" *ngIf="label">{{ label }}&nbsp;<span
+            *ngIf="required && (!getValue()) ">*</span></label>
+        <input [type]="controlType" clrDate required minlength="3" [attr.minlength]="minlength"
+          [attr.maxlength]="maxlength" [attr.min]="min" [attr.max]="max" [attr.minDate]="minDate"
+          [attr.maxDate]="maxDate" [id]="name" [name]="name" [placeholder]="' '" [class]="[hasValueClass(), inputClass]"
+          [disabled]="disabled" [readonly]="readonly" (blur)="onBlur()" (focus)="onFocus()"
+          (input)="onInputChange($event)" [(ngModel)]="value" #ctrl="ngModel" style="display: inline-block" size="20">
+        <clr-control-error *ngIf="ctrl && ctrl?.touched && ctrl?.invalid">
+          <div *ngIf="loaded ">
+            <span class="clr-subtext error-messages">
+              <div *ngIf="ctrl?.errors?.['required']">
+                {{label}} is required
+              </div>
+            </span>
+          </div>
+        </clr-control-error>
+      </clr-date-container>
 
-    <!-- Default case for other input types -->
-    <input *ngSwitchDefault [type]="controlType" clrInput required minlength="3" [attr.minlength]="minlength"
-      [attr.maxlength]="maxlength" [attr.min]="min" [attr.max]="max" [attr.minDate]="minDate" [attr.maxDate]="maxDate"
-      [id]="name" [name]="name" [placeholder]="' '" [class]="[hasValueClass(), inputClass]" [disabled]="disabled"
-      [readonly]="readonly" (blur)="onBlur()" (focus)="onFocus()" (input)="onInputChange($event)" [(ngModel)]="value"
-      #ctrl="ngModel" style="display: inline-block" size="20" />
-    <div class="hint-text" *ngIf="hint">{{ hint }}</div>
-
-    <div *ngIf="loaded ">
-      <div *ngIf="ctrl && ctrl?.touched && ctrl?.invalid" class="error-messages">
-        <div *ngIf="ctrl?.errors?.['required']">
-          {{label}} is required
-        </div>
-        <div *ngIf="ctrl &&  ctrl?.errors?.['minlength']">
-          Input must be at least {{ctrl.errors?.['minlength']?.requiredLength}} characters long. Current length:
-          {{ctrl.errors?.['minlength']?.actualLength}}
-        </div>
-        <div *ngIf="ctrl &&  ctrl?.errors?.['maxlength']">
-          Max length
-        </div>
-
-
-      </div>
-    </div>
-
-  </ng-container>
-
-
-
+      <!-- Default case for other input types -->
+      <clr-input-container *ngSwitchDefault>
+        <label for="vacode" [class]="labelClass" *ngIf="label">{{ label }}&nbsp;<span
+            *ngIf="required && (!getValue()) ">*</span></label>
+        <input [type]="controlType" clrInput required minlength="3" [attr.minlength]="minlength"
+          [attr.maxlength]="maxlength" [attr.min]="min" [attr.max]="max" [attr.minDate]="minDate"
+          [attr.maxDate]="maxDate" [id]="name" [name]="name" [placeholder]="' '" [class]="[hasValueClass(), inputClass]"
+          [disabled]="disabled" [readonly]="readonly" (blur)="onBlur()" (focus)="onFocus()"
+          (input)="onInputChange($event)" [(ngModel)]="value" #ctrl="ngModel" style="display: inline-block" size="20" />
+        <clr-control-error *ngIf="ctrl && ctrl?.touched && ctrl?.invalid">
+          <div *ngIf="loaded ">
+            <span class="clr-subtext error-messages">
+              <div *ngIf="ctrl?.errors?.['required']">
+                {{label}} is required
+              </div>
+              <div *ngIf="ctrl &&  ctrl?.errors?.['minlength']">
+                Input must be at least {{ctrl.errors?.['minlength']?.requiredLength}} characters long. Current length:
+                {{ctrl.errors?.['minlength']?.actualLength}}
+              </div>
+              <div *ngIf="ctrl &&  ctrl?.errors?.['maxlength']">
+                Max length
+              </div>
+            </span>
+          </div>
+        </clr-control-error>
+      </clr-input-container>
+    </ng-container>
+  </div>
 </div>

@@ -84,7 +84,7 @@
             <div class="clr-col-12 clr-col-md-8 req">
               <clr-date-container>
                 <label for="startDate" class="clr-col-12 clr-col-md-6">Start&nbsp;Date</label>
-                <input class="clr-col-12 clr-col-md-6" type="date" autocomplete="off"   clrDate id="startDate" formControlName="frmStartDate" >
+                <input class="clr-col-12 clr-col-md-6" type="date" autocomplete="off" clrDate id="startDate" formControlName="frmStartDate" >
                 <clr-control-error *ngIf="weatheraddform.get('frmStartDate')?.invalid && weatheraddform.get('frmStartDate')?.touched" >
                     <span *ngIf="weatheraddform.get('frmStartDate')?.errors?.['required']"> This field is required!</span>
                     </clr-control-error>

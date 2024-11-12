@@ -106,6 +106,15 @@ export class FrDynamicFormComponent implements OnInit {
     });
   }
 
+  getClasses(field:any){
+    return [
+      field.cssHostClass,
+      field.cssHostClass2,
+      field.cssHostClass3,
+      field.cssClass
+    ].filter(Boolean).join(' ')
+  }
+
   private getInitialValue(field: FormField): any {
     return this.config.initialValues?.[field.name] 
       ?? field.value 
