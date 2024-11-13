@@ -34,7 +34,7 @@ export class SearchComponent {
 
  editEntry(entry:any){
   this.gridData = entry;
-  this.openModal()
+  this.openModal('edit')
  }
 
  handleFormClose(event:any){
@@ -72,7 +72,8 @@ onSubmit(_form:any):void{
   });
 }
 
-openModal():void{
-  this.addevent.openModal();
+openModal(mode:string):void{
+  if(mode === 'add') this.gridData = null;
+  this.addevent.openModal(mode);
 }
 }

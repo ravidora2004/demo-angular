@@ -3,3 +3,12 @@
     content: '* ';
     display:inline;
 }
+::ng-deep .combo-box clr-combobox .clr-combobox-wrapper{
+    border-style: none;
+    background-color: transparent;
+    border-radius: 0;
+    border-bottom: var(--cds-alias-object-border-width-100) solid var(--clr-forms-border-color);;
+}
+::ng-deep .combo-box clr-combobox .clr-combobox-wrapper:hover{
+    background-color: transparent;
+}
