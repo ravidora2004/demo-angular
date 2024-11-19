@@ -26,4 +26,9 @@ export class CommonService {
   addWeatherEvent(request:WeatherEventRequest):Observable<Result>{
     return this.http.post<Result>(this.commonUrl +'WeatherEvent',request)
   };
+
+  // Call the api to get the content from the api
+  getWeatherEventById(params:string):Observable<Result>{
+    return this.http.get<Result>(`${this.commonUrl}WeatherAlerts/GetEventById?WeatherAlertID=${params}`); // add the rest of the url 
+  }
 }

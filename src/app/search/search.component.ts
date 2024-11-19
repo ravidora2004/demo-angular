@@ -11,6 +11,7 @@ import { Result } from '../models/commonmodels';
 export class SearchComponent {
   @ViewChild(AddeventComponent) addevent!:AddeventComponent;
   weatherEvents = [{'startDate': 1728561703122, 
+    WeatherAlertID:'007',
     'endDate': 1733952000000,
      'weatherEvent': 'Winter Storm Nancy', 
       'weatherType': 'Severe winter', 'description': 'Snow', 'location': 'West to East', 'country': 'USA'}]
@@ -33,23 +34,31 @@ export class SearchComponent {
  }
 
  editEntry(entry:any){
-  this.gridData = entry;
-  this.openModal('edit')
+  this.commonService.getWeatherEventById(entry.WeatherAlertID) // check what key points to the ID in the event object
+  .subscribe({
+    next : (response:any) =>{
+      this.gridData = response; // check what you get in response and set it to this.gridData
+      this.openModal('edit')
+    },
+    error:(error:any) => {
+      // Show error message on the toaster
+    }
+  })
+  
  }
 
  handleFormClose(event:any){
   this.gridData = event;
  }
 
- reset():void{
-  this.weathersearch.reset();
+ reset(_form:any):void{
+  _form.reset();
   this.weatherEvents=[];
   this.weatherResult={} as Result;
  }
+
  ngOnInit(){
-  
   this.commonService.getallCountries().subscribe((results:any)=>{
-  
     if(results.succeeded){
       this.countries = results.data;
     }

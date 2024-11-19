@@ -12,6 +12,3 @@
 ::ng-deep .combo-box clr-combobox .clr-combobox-wrapper:hover{
     background-color: transparent;
 }
-.modal-body{
-    background:var(--cds-alias-object-interaction-background-highlight)
-}

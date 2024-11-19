@@ -43,7 +43,7 @@ export class AddeventComponent implements OnInit {
   request = {} as WeatherEventRequest;
   isOtherDescriptionRequired: boolean = false;
 
-  constructor(private fb: FormBuilder, private commonService: CommonService) {
+  constructor(private commonService: CommonService) {
 
   }
 
