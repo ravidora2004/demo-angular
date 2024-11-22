@@ -46,6 +46,15 @@ export class AddeventComponent implements OnInit {
   constructor(private commonService: CommonService) {
 
   }
+  validateDate(value: any) {
+    if (!value) {
+      return { required: true };
+    }
+    if (isNaN(Date.parse(value))) {
+      return { invalidDate: true };
+    }
+    return null; // Valid date
+  }
 
   openModal(mode = 'add'): void {
     this.open = true;
