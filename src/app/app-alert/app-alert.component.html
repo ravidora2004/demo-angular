@@ -1,0 +1,9 @@
+<clr-alert class="app-notification-wrapper" *ngIf="alertService.shouldShowAlert" [clrAlertType]="alertService.alertConfig.clrAlertType || 'success'"
+    (clrAlertClosedChange)="onClose($event)" [clrAlertAppLevel]="alertService.alertConfig.clrAlertAppLevel || true"
+    [clrAlertClosable]="alertService.alertConfig.clrAlertClosable || true">
+    <clr-alert-item>
+        <span class="alert-text">
+            {{alertService.alertConfig.message}}
+        </span>
+    </clr-alert-item>
+</clr-alert>

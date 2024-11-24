@@ -3,6 +3,7 @@ import { WeatherEvent, WeatherEventRequest } from '../dtos/dtos';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { CommonService } from '../services/common.service';
 import { formatDate } from '@angular/common';
+import { AlertService, IAlertType } from '../services/alert.service';
 
 @Component({
   selector: 'app-addevent',
@@ -43,7 +44,7 @@ export class AddeventComponent implements OnInit {
   request = {} as WeatherEventRequest;
   isOtherDescriptionRequired: boolean = false;
 
-  constructor(private commonService: CommonService) {
+  constructor(private commonService: CommonService, private alertService:AlertService) {
 
   }
   validateDate(value: any) {
@@ -54,6 +55,10 @@ export class AddeventComponent implements OnInit {
       return { invalidDate: true };
     }
     return null; // Valid date
+  }
+
+  log(vvvv:any){
+    console.log(vvvv)
   }
 
   openModal(mode = 'add'): void {
@@ -85,6 +90,10 @@ export class AddeventComponent implements OnInit {
   }
 
   onSubmit(_form: any): void {
+    this.alertService.show({
+      message: 'Form validation failed',
+      clrAlertType: IAlertType.DANGER
+    })
     if (this.weatherAdd.valid) {
 
       alert(this.weatherAdd.value)

@@ -1,0 +1,16 @@
+app-app-alert{
+    position: sticky;
+    top: 10px;
+}
+.app-notification-wrapper > div{
+    height:  60px!important;
+    overflow: hidden;
+    width: 280px;
+}
+.app-notification-wrapper{
+    width: 280px;
+    position: absolute;
+    left: 79.6vw;
+    top: 6px;
+    z-index: 999999;
+}
