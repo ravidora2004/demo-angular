@@ -1,11 +1,11 @@
-<div class="clr-row">
+<div class="clr-row" *ngIf="notification">
     <div class="clr-col-3">
         <div class="clr-row">
             <div class="clr-col-4">
                 <p cds-text="body semibold">Case ID:</p>
             </div>
             <div class="clr-col">
-                <p cds-text="body">5507744.2</p>
+                <p cds-text="body">{{notification?.caseId}}</p>
             </div>
         </div>
     </div>
@@ -15,7 +15,7 @@
                 <p cds-text="body semibold">Mini Team:</p>
             </div>
             <div class="clr-col">
-                <p cds-text="body">310A</p>
+                <p cds-text="body">{{notification?.miniTeam}}</p>
             </div>
         </div>
     </div>
@@ -27,7 +27,7 @@
                 <p cds-text="body semibold">name (L,F):</p>
             </div>
             <div class="clr-col">
-                <p cds-text="body">Last Name, First Name</p>
+                <p cds-text="body">{{notification?.name}}</p>
             </div>
         </div>
     </div> <div class="clr-col-3">
@@ -36,7 +36,7 @@
                 <p cds-text="body semibold">DOB:</p>
             </div>
             <div class="clr-col">
-                <p cds-text="body">12/05/1965</p>
+                <p cds-text="body">{{notification?.dob | date}}</p>
             </div>
         </div>
     </div> <div class="clr-col-3">
@@ -45,7 +45,7 @@
                 <p cds-text="body semibold">Gender:</p>
             </div>
             <div class="clr-col">
-                <p cds-text="body">M</p>
+                <p cds-text="body">{{notification?.gender | uppercase}}</p>
             </div>
         </div>
     </div> <div class="clr-col-3">
@@ -54,7 +54,7 @@
                 <p cds-text="body semibold">SSN:</p>
             </div>
             <div class="clr-col">
-                <p cds-text="body">XXXX-XX-9999</p>
+                <p cds-text="body">{{notification?.ssn}}</p>
             </div>
         </div>
     </div>
