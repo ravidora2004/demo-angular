@@ -9,6 +9,13 @@
 ::ng-deep clr-modal form{
     padding: 0!important;
 }
+::ng-deep clr-modal form .action-btn{
+    display: flex;
+    justify-content: flex-end;
+}
+::ng-deep clr-modal form .clr-form-control{
+    margin-top: 20px!important;
+}
 ::ng-deep .combo-box clr-combobox .clr-combobox-wrapper{
     border-style: none;
     background-color: transparent;
