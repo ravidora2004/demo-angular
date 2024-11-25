@@ -17,3 +17,6 @@ p {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#201747', endColorstr='#850f89', GradientType=1 );
 
 }
+.content-container{
+  padding-bottom: 25px;
+}
