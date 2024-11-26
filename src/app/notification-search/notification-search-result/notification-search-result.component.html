@@ -1,48 +1,8 @@
-<div class="result-wrapper">
-    <clr-datagrid [(clrDgSelected)]="selected">
-        <clr-dg-column>
+<div class="result-wrapper" *ngIf="weatherEvents">
+    <clr-datagrid [(clrDgSelected)]="selected" (clrDgSelectedChange)="handleRowChange()">
+        <clr-dg-column *ngFor="let header of tableHeader">
             <ng-container *clrDgHideableColumn="{hidden:false}">
-                Weather Event
-            </ng-container>
-        </clr-dg-column>
-        <clr-dg-column>
-            <ng-container *clrDgHideableColumn="{hidden:false}">
-                Weather Type
-            </ng-container>
-        </clr-dg-column>
-        <clr-dg-column>
-            <ng-container *clrDgHideableColumn="{hidden:false}">
-                Description
-            </ng-container>
-        </clr-dg-column>
-        <clr-dg-column>
-            <ng-container *clrDgHideableColumn="{hidden:false}">
-                Location
-            </ng-container>
-        </clr-dg-column>
-        <clr-dg-column>
-            <ng-container *clrDgHideableColumn="{hidden:false}">
-                Country
-            </ng-container>
-        </clr-dg-column>
-        <clr-dg-column>
-            <ng-container *clrDgHideableColumn="{hidden:false}">
-                State
-            </ng-container>
-        </clr-dg-column>
-        <clr-dg-column>
-            <ng-container *clrDgHideableColumn="{hidden:false}">
-                Event Start Date
-            </ng-container>
-        </clr-dg-column>
-        <clr-dg-column>
-            <ng-container *clrDgHideableColumn="{hidden:false}">
-                Event End Date
-            </ng-container>
-        </clr-dg-column>
-        <clr-dg-column>
-            <ng-container *clrDgHideableColumn="{hidden:false}">
-                Status
+               {{header}}
             </ng-container>
         </clr-dg-column>
 

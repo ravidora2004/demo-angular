@@ -1,18 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { SearchForm } from '../../models/notification';
 
-interface searchFormType{
-  startDate: string,
-  endDate:string,
-  location:string
-}
 @Component({
   selector: 'notification-search-form',
   templateUrl: './notification-search-form.component.html',
   styleUrl: './notification-search-form.component.css'
 })
 export class NotificationSearchFormComponent {
-  
-  notificationSearch:searchFormType={
+  @Output() onFormUpdate = new EventEmitter()
+  notificationSearch:SearchForm={
     startDate:'',
     endDate:'',
     location:''
@@ -20,13 +16,17 @@ export class NotificationSearchFormComponent {
 
   // Handle form submit
   onSubmit(_form:any){
-    console.log(_form.invalid)
+    if(_form.valid){
+      this.onFormUpdate.emit({form: _form.value, type:'save'})
+    }
   }
   
   // Save search form 
-  saveSearchForm(_form:any){
+  onSearch(_form:any){
     // Call the api to save the content
-    console.log(_form.value)
+    if(_form.valid){
+      this.onFormUpdate.emit({form: _form.value, type:'search'})
+    }
   }
 
   // Trigger the close event, it can be redirect also
