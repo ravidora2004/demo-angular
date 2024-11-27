@@ -46,11 +46,21 @@
                 <input class="clr-col-12 clr-col-md-8" clrInput type="text" id="location"  name="location" #frmSrchLocation="ngModel" [(ngModel)]="weathersearch.frmSrchLocation" />
               </clr-input-container>
         </div>
-        <div class="clr-col-12 clr-col-md-3" *ngIf="weathersearch.frmSrchCountry === 'usa'">
-            <clr-input-container>
-                <label for="state" class="clr-col-12 clr-col-md-2"><div>State</div></label>
-                <input class="clr-col-12 clr-col-md-8" clrInput type="text" id="state"  name="state" #frmSrchLocation="ngModel" [(ngModel)]="weathersearch.state" />
-              </clr-input-container>
+        <div class="clr-col-12 clr-col-md-3 combo-box" *ngIf="weathersearch.frmSrchCountry === 'usa'">
+            <clr-combobox-container>
+                <label class="clr-col-12 clr-col-md-3">States</label>
+                <clr-combobox class="clr-col-12 clr-col-md-6" [(ngModel)]="weathersearch.state" clrMulti="true" name="frmState" #frmState="ngModel" [required]="weathersearch.frmSrchCountry.toLowerCase() === 'usa'">
+                  <ng-container *clrOptionSelected="let selected">
+                    {{ selected?.name }}
+                  </ng-container>
+                  <clr-options>
+                    <clr-option *clrOptionItems="let state of states; field: 'name'" [clrValue]="state">
+                      {{ state.name }}
+                    </clr-option>
+                  </clr-options>
+                </clr-combobox>
+                <clr-control-error *ngIf="frmState?.invalid && frmState?.touched">This field is required</clr-control-error>
+              </clr-combobox-container>
         </div>
         <div class="clr-col-12 clr-col-md-9"> </div>
     </div>

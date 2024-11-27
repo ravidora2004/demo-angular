@@ -10,6 +10,7 @@ import { Result } from '../models/commonmodels';
 })
 export class SearchComponent {
   @ViewChild(AddeventComponent) addevent!:AddeventComponent;
+  states:Array<any>=[{name:'Alaska', value:'al'}]
   weatherEvents = [{'startDate': 1728561703122, 
     WeatherAlertID:'007',
     'endDate': 1733952000000,
