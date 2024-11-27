@@ -46,6 +46,12 @@
                 <input class="clr-col-12 clr-col-md-8" clrInput type="text" id="location"  name="location" #frmSrchLocation="ngModel" [(ngModel)]="weathersearch.frmSrchLocation" />
               </clr-input-container>
         </div>
+        <div class="clr-col-12 clr-col-md-3" *ngIf="weathersearch.frmSrchCountry === 'usa'">
+            <clr-input-container>
+                <label for="state" class="clr-col-12 clr-col-md-2"><div>State</div></label>
+                <input class="clr-col-12 clr-col-md-8" clrInput type="text" id="state"  name="state" #frmSrchLocation="ngModel" [(ngModel)]="weathersearch.state" />
+              </clr-input-container>
+        </div>
         <div class="clr-col-12 clr-col-md-9"> </div>
     </div>
       <div class="clr-row">
