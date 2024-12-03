@@ -1,57 +1,62 @@
 import { Injectable } from '@angular/core';
-import { Subject} from 'rxjs';
-
-export enum IAlertType {
-  INFO = "info",
-  WARNING = "warning",
-  SUCCESS = "success",
-  DANGER = "danger"
-}
+import { BehaviorSubject, Subject, timer } from 'rxjs';
 
 export interface IAlertConfig {
-  clrAlertType?: IAlertType,
+  clrAlertType: string; // Add your own types
   message: string;
   clrAlertAppLevel?: boolean;
   clrAlertClosable?: boolean;
 }
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AlertService {
-  shouldShowAlert: boolean = false;
-  alertConfig: IAlertConfig = {
-    clrAlertType: IAlertType.INFO,
-    message: "",
-    clrAlertAppLevel: false,
-    clrAlertClosable: true
-  };
+  private messageQueue: IAlertConfig[] = [];
+  private alertListSubject = new BehaviorSubject<IAlertConfig[]>([]);
   close = new Subject<any>();
 
-  constructor() { }
+  constructor() {}
 
-  show(config: IAlertConfig): AlertService {
-    this.shouldShowAlert = true;
-    this.alertConfig = {...this.alertConfig, ...config};
-    return this;
+  /**
+   * Push a new message to the queue.
+   */
+  pushMessage(config: IAlertConfig): void {
+    this.messageQueue.push(config);
+    this.emitAlertList();
+    this.autoClose(config);
   }
 
-  hide(): AlertService {
-    this.shouldShowAlert = false;
-    return this;
+  /**
+   * Remove a message from the queue.
+   */
+  removeMessage(message: IAlertConfig): void {
+    const index = this.messageQueue.indexOf(message);
+    if (index > -1) {
+      this.messageQueue.splice(index, 1);
+      this.emitAlertList();
+    }
   }
 
-  toggle(): AlertService {
-    this.shouldShowAlert = !this.shouldShowAlert;
-    return this;
+  /**
+   * Get observable for the current alert list.
+   */
+  getAlerts$() {
+    return this.alertListSubject.asObservable();
   }
 
-  onClose(value: any): any {
-   this.hide();
-   this.close.next(value);
+  /**
+   * Emit the current alert list.
+   */
+  private emitAlertList(): void {
+    this.alertListSubject.next([...this.messageQueue]);
   }
 
-  onClose$(): any {
-    return this.close;
+  /**
+   * Auto-close a message after 7 seconds.
+   */
+  private autoClose(config: IAlertConfig): void {
+    timer(7000).subscribe(() => {
+      this.removeMessage(config);
+    });
   }
 }

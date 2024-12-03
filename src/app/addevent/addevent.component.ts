@@ -3,7 +3,7 @@ import { WeatherEvent, WeatherEventRequest } from '../dtos/dtos';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { CommonService } from '../services/common.service';
 import { formatDate } from '@angular/common';
-import { AlertService, IAlertType } from '../services/alert.service';
+import { AlertService } from '../services/alert.service';
 
 @Component({
   selector: 'app-addevent',
@@ -90,10 +90,12 @@ export class AddeventComponent implements OnInit {
   }
 
   onSubmit(_form: any): void {
-    this.alertService.show({
-      message: 'Form validation failed',
-      clrAlertType: IAlertType.DANGER
-    })
+    this.alertService.pushMessage({
+      clrAlertType: 'danger',
+      message: `This is a success alert! ${performance.now()}`,
+      clrAlertAppLevel: false,
+      clrAlertClosable: true,
+    });
     if (this.weatherAdd.valid) {
 
       alert(this.weatherAdd.value)
