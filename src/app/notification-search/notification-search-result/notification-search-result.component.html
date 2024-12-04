@@ -19,7 +19,7 @@
         </clr-dg-row>
 
         <clr-dg-footer>
-            <clr-dg-pagination #pagination>
+            <clr-dg-pagination #pagination *ngIf="weatherEvents.length > 10">
               <clr-dg-page-size [clrPageSizeOptions]="[10, 20, 50, 100]">
                 Elements per page
               </clr-dg-page-size>
