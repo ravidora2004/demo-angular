@@ -1,11 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SearchForm, weatherEventType } from '../models/notification';
+import { ActivatedRoute } from '@angular/router';
+
 @Component({
   selector: 'notification-search',
   templateUrl: './notification-search.component.html',
   styleUrl: './notification-search.component.css'
 })
-export class NotificationSearchComponent {
+export class NotificationSearchComponent implements OnInit {
+  constructor(private route: ActivatedRoute) {}
   weatherEvents:Array<weatherEventType>=[
     {
         "weatherEvent": "Hurricane Delta",
@@ -215,5 +218,14 @@ export class NotificationSearchComponent {
     handleSearch(payload: SearchForm){
       // Call the api to search the data 
       console.log(payload)
+    }
+
+    ngOnInit() {
+      this.route.queryParamMap.subscribe((params) => {
+        const claimantId = params.get('claimantid'); // Replace 'param1' with your query parameter name
+        const caseId = params.get('caseid');
+        console.log('ClaimantId :', claimantId);
+        console.log('case Id', caseId);
+      });
     }
 }
