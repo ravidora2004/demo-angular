@@ -202,7 +202,7 @@ export class NotificationSearchComponent implements OnInit {
      *    Trigger when a row is selected in the grid table
      */
     handleSelectionChange(selectedRow:Array<any>){
-      console.log(selectedRow)
+      console.log('selectedRow', selectedRow)
     }
 
     /**

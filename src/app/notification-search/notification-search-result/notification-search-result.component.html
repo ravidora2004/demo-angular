@@ -1,4 +1,4 @@
-<div class="result-wrapper" *ngIf="weatherEvents">
+<div class="result-wrapper" *ngIf="weatherEventsList">
     <clr-datagrid [(clrDgSelected)]="selected" (clrDgSelectedChange)="handleRowChange()">
         <clr-dg-column *ngFor="let header of tableHeader">
             <ng-container *clrDgHideableColumn="{hidden:false}">
@@ -6,7 +6,7 @@
             </ng-container>
         </clr-dg-column>
 
-        <clr-dg-row *clrDgItems="let weather of weatherEvents" [clrDgItem]="weather">
+        <clr-dg-row *clrDgItems="let weather of weatherEventsList" [clrDgItem]="weather">
             <clr-dg-cell>{{ weather.weatherEvent }}</clr-dg-cell>
             <clr-dg-cell>{{ weather.weatherType }}</clr-dg-cell>
             <clr-dg-cell>{{ weather.description}}</clr-dg-cell>
@@ -19,7 +19,7 @@
         </clr-dg-row>
 
         <clr-dg-footer>
-            <clr-dg-pagination #pagination *ngIf="weatherEvents.length > 10">
+            <clr-dg-pagination #pagination *ngIf="weatherEventsList.length > 10">
               <clr-dg-page-size [clrPageSizeOptions]="[10, 20, 50, 100]">
                 Elements per page
               </clr-dg-page-size>
