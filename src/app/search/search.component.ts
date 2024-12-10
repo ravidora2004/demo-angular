@@ -14,7 +14,7 @@ export class SearchComponent {
   initialFormValue:any = {
     frmSrchCountry:'usa',
     frmSrchWeatherType:'',
-    frmSrchStDt:new Date(),
+    frmSrchStDt:'01/02/2015',
     frmSrchEndDt:'',
     frmSrchLocation:'',
   }
@@ -26,7 +26,7 @@ export class SearchComponent {
   //weatherEvents: WeatherEvent[]=[];
   countries : Country[]=[];
   weatherTypes : WeatherType[]=[];
-  weathersearch:any = this.initialFormValue;
+  weathersearch:any = JSON.parse(JSON.stringify(this.initialFormValue));
   weatherResult ={} as Result;
   filterEnabled :boolean=true;
 
@@ -54,7 +54,10 @@ export class SearchComponent {
  }
 
  reset(_form:any):void{
-  _form.resetForm(this.initialFormValue);
+  this.weathersearch = {...this.initialFormValue};
+  _form.form.markAsPristine();
+  _form.form.markAsUntouched();
+  _form.form.updateValueAndValidity();
   this.weatherEvents=[];
   this.weatherResult={} as Result;
  }
