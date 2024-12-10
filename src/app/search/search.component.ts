@@ -10,7 +10,14 @@ import { Result } from '../models/commonmodels';
 })
 export class SearchComponent {
   @ViewChild(AddeventComponent) addevent!:AddeventComponent;
-  states:Array<any>=[{name:'Alaska', value:'al'}]
+  states:Array<any>=[{name:'Alaska', value:'al'}];
+  initialFormValue:any = {
+    frmSrchCountry:'usa',
+    frmSrchWeatherType:'',
+    frmSrchStDt:new Date(),
+    frmSrchEndDt:'',
+    frmSrchLocation:'',
+  }
   weatherEvents = [{'startDate': 1728561703122, 
     WeatherAlertID:'007',
     'endDate': 1733952000000,
@@ -19,13 +26,7 @@ export class SearchComponent {
   //weatherEvents: WeatherEvent[]=[];
   countries : Country[]=[];
   weatherTypes : WeatherType[]=[];
-  weathersearch:any = {
-    frmSrchCountry:'',
-    frmSrchWeatherType:'',
-    frmSrchStDt:'',
-    frmSrchEndDt:'',
-    frmSrchLocation:'',
-  };
+  weathersearch:any = this.initialFormValue;
   weatherResult ={} as Result;
   filterEnabled :boolean=true;
 
@@ -53,7 +54,7 @@ export class SearchComponent {
  }
 
  reset(_form:any):void{
-  _form.reset();
+  _form.resetForm(this.initialFormValue);
   this.weatherEvents=[];
   this.weatherResult={} as Result;
  }

@@ -25,7 +25,7 @@ export class AddeventComponent implements OnInit {
       }
     } else {
       this.eventType = 'New ';
-      this.weatheraddform.reset()
+      this.weatheraddform?.reset()
     }
   }
   @HostListener('document:keydown.escape', ['$event'])
