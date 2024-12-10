@@ -6,9 +6,9 @@
                 <div class="clr-col-12 clr-col-md-8 req">
                     <clr-input-container>
                         <label for="vacode" class="clr-col-12 clr-col-md-6">VA Weather Code</label>
-                        <input class="clr-col-12 clr-col-md-6" required clrInput id="vacode" name="frmVaCode" #frmVaCode="ngModel" [(ngModel)]="weatherAdd.frmVaCode"  />
+                        <input class="clr-col-12 clr-col-md-6" pattern=".*\S.*" required clrInput id="vacode" name="frmVaCode" #frmVaCode="ngModel" [(ngModel)]="weatherAdd.frmVaCode"  />
                         <clr-control-error *ngIf="frmVaCode?.invalid && frmVaCode?.touched" >
-                        <span *ngIf="frmVaCode?.errors?.['required']"> This field is required!</span>
+                        <span *ngIf="frmVaCode?.errors?.['required'] || frmVaCode?.errors?.['pattern']"> This field is required!</span>
                         </clr-control-error>
                       </clr-input-container>
                 </div>
@@ -18,9 +18,9 @@
             <div class="clr-col-12 clr-col-md-8 req">
                 <clr-input-container>
                     <label for="WeatherEvent" class="clr-col-12 clr-col-md-6">Weather Event</label>
-                    <input class="clr-col-12 clr-col-md-6" type="text" required clrInput maxlength="60"  id="WeatherEvent" name="frmWeatherEvent" #frmWeatherEvent="ngModel" [(ngModel)]="weatherAdd.frmWeatherEvent" />
+                    <input class="clr-col-12 clr-col-md-6" type="text" pattern=".*\S.*" required clrInput maxlength="60"  id="WeatherEvent" name="frmWeatherEvent" #frmWeatherEvent="ngModel" [(ngModel)]="weatherAdd.frmWeatherEvent" />
                     <clr-control-error *ngIf="frmWeatherEvent?.invalid && frmWeatherEvent?.touched" >
-                        <span *ngIf="frmWeatherEvent?.errors?.['required']"> This field is required!</span>
+                        <span *ngIf="frmWeatherEvent?.errors?.['required'] || frmWeatherEvent?.errors?.['pattern']"> This field is required!</span>
                         </clr-control-error>
                 </clr-input-container>
             </div>
@@ -31,7 +31,7 @@
                 <label for="reasons" class="clr-col-12 clr-col-md-6">Reason</label>
                 <input  class="clr-col-12 clr-col-md-6" clrDatalistInput required id="reasons" placeholder="Select" name="frmReasons" #frmReasons="ngModel" [(ngModel)]="weatherAdd.frmReasons" (change)="setOtherReasonValidation($event)" />
                 <clr-control-error *ngIf="frmReasons?.invalid && frmReasons?.touched" >
-                    <span *ngIf="frmReasons?.errors?.['required']"> This field is required!</span>
+                    <span *ngIf="frmReasons?.errors?.['required'] || frmReasons?.errors?.['pattern']"> This field is required!</span>
                     </clr-control-error>
                 <datalist>
                     <option *ngFor="let item of weatherTypes" [value]="item.weatherName">{{item.weatherName}}</option>
@@ -45,7 +45,7 @@
                     <label for="otherDescription" class="clr-col-12 clr-col-md-6">If Other </label>
                     <input class="clr-col-12 clr-col-md-6" placeholder="" [required]="isOtherDescriptionRequired" clrInput name="frmOtherDescription" #frmOtherDescription="ngModel" [(ngModel)]="weatherAdd.frmOtherDescription"  />
                     <clr-control-error *ngIf="frmOtherDescription?.invalid && frmOtherDescription?.touched" >
-                        <span *ngIf="frmOtherDescription?.errors?.['required']"> This field is required!</span>
+                        <span *ngIf="frmOtherDescription?.errors?.['required'] || frmOtherDescription?.errors?.['pattern']"> This field is required!</span>
                         </clr-control-error>
                   </clr-input-container>
             </div>
@@ -58,7 +58,7 @@
                 <label for="country" class="clr-col-12 clr-col-md-6">Country</label>
                 <input class="clr-col-12 clr-col-md-6" clrDatalistInput placeholder="Select" required id="country"  name="frmCountry" #frmCountry="ngModel" [(ngModel)]="weatherAdd.frmCountry" />
                 <clr-control-error *ngIf="frmCountry?.invalid && frmCountry?.touched" >
-                    <span *ngIf="frmCountry?.errors?.['required']"> This field is required!</span>
+                    <span *ngIf="frmCountry?.errors?.['required'] || frmCountry?.errors?.['pattern']"> This field is required!</span>
                     </clr-control-error>
                 <datalist>
                     <option *ngFor="let item of countries" [value]="item.countryName">{{item.countryName}}</option>
@@ -90,9 +90,9 @@
         <div class="clr-col-12 clr-col-md-8 req">
             <clr-input-container>
                 <label for="location" class="clr-col-12 clr-col-md-6 req">Location</label>
-                <input type="text" class="clr-col-12 clr-col-md-6" placeholder="" required clrInput maxlength="60"   id="location" name="frmLocation" #frmLocation="ngModel" [(ngModel)]="weatherAdd.frmLocation" />
+                <input type="text" class="clr-col-12 clr-col-md-6" placeholder="" pattern=".*\S.*" required clrInput maxlength="60"   id="location" name="frmLocation" #frmLocation="ngModel" [(ngModel)]="weatherAdd.frmLocation" />
                 <clr-control-error *ngIf="frmLocation?.invalid && frmLocation?.touched" >
-                    <span *ngIf="frmLocation?.errors?.['required']"> This field is required!</span>
+                    <span *ngIf="frmLocation?.errors?.['required'] || frmLocation?.errors?.['pattern']"> This field is required!</span>
                     <span *ngIf="frmLocation?.errors?.['maxLength']"> Max length is exceeded!</span>
                     </clr-control-error>                
               </clr-input-container>
@@ -106,7 +106,7 @@
                 (keyup)="frmStartDate.control.setErrors(validateDate(frmStartDate.value))" >
                 <clr-control-error *ngIf="frmStartDate?.invalid && frmStartDate?.touched" >
                     <span *ngIf="frmStartDate?.errors?.['invalidDate']">Invalid data format</span>
-                    <span *ngIf="frmStartDate?.errors?.['required']"> This field is required!</span>
+                    <span *ngIf="frmStartDate?.errors?.['required'] || frmStartDate?.errors?.['pattern']"> This field is required!</span>
                 </clr-control-error>
             </clr-date-container>
         </div>
@@ -117,7 +117,7 @@
                 <label for="enddate" class="clr-col-12 clr-col-md-6">End Date</label>
                 <input  class="clr-col-12 clr-col-md-6" type="date" autocomplete="off" required clrDate id="enddate" name="frmEndDate" #frmEndDate="ngModel" [(ngModel)]="weatherAdd.frmEndDate" >
                 <clr-control-error *ngIf="frmEndDate?.invalid && frmEndDate?.touched" >
-                    <span *ngIf="frmEndDate?.errors?.['required']"> This field is required!</span>
+                    <span *ngIf="frmEndDate?.errors?.['required'] || frmEndDate?.errors?.['pattern']"> This field is required!</span>
                     </clr-control-error>
             </clr-date-container>
         </div>
@@ -128,7 +128,7 @@
                 <label for="description" class="clr-col-12 clr-col-md-5">Description</label>
                 <textarea  class="clr-col-12 clr-col-md-7"  [maxLength]="300" required  clrTextarea  id="description" name="frmDescription" #frmDescription="ngModel" [(ngModel)]="weatherAdd.frmDescription"  ></textarea>
                 <clr-control-error *ngIf="frmDescription?.invalid && frmDescription?.touched" >
-                    <span *ngIf="frmDescription?.errors?.['required']"> This field is required!</span>
+                    <span *ngIf="frmDescription?.errors?.['required'] || frmDescription?.errors?.['pattern']"> This field is required!</span>
                     <span *ngIf="frmDescription?.errors?.['length']"> Max length is exceeded!</span>
                     </clr-control-error>
               </clr-textarea-container>
