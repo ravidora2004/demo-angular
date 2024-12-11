@@ -6,7 +6,7 @@
             </ng-container>
         </clr-dg-column>
         <clr-dg-placeholder>We couldn't find any result!</clr-dg-placeholder>
-        <ng-template *ngIf="weatherEventsList">
+        <ng-container *ngIf="weatherEventsList">
           <clr-dg-row *clrDgItems="let weather of weatherEventsList" [clrDgItem]="weather">
               <clr-dg-cell>{{ weather.weatherEvent }}</clr-dg-cell>
               <clr-dg-cell>{{ weather.weatherType }}</clr-dg-cell>
@@ -28,6 +28,6 @@
               {{ pagination.totalItems }} elements
             </clr-dg-pagination>
           </clr-dg-footer>
-        </ng-template>
+        </ng-container>
       </clr-datagrid>
 </div>
