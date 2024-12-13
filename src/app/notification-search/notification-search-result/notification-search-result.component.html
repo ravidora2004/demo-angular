@@ -19,7 +19,7 @@
               <clr-dg-cell>{{ weather.status | titlecase }}</clr-dg-cell>
           </clr-dg-row>
   
-          <clr-dg-footer *ngIf="weatherEventsList">
+          <clr-dg-footer>
             <clr-dg-pagination #pagination *ngIf="weatherEventsList.length > 10">
               <clr-dg-page-size [clrPageSizeOptions]="[10, 20, 50, 100]">
                 Elements per page

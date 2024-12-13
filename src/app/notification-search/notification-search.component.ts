@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class NotificationSearchComponent implements OnInit {
   constructor(private route: ActivatedRoute) {}
+  selectedEvents:weatherEventType[] = [];
   weatherEvents:Array<weatherEventType>=[
     {
         "weatherEvent": "Hurricane Delta",
@@ -202,6 +203,7 @@ export class NotificationSearchComponent implements OnInit {
      *    Trigger when a row is selected in the grid table
      */
     handleSelectionChange(selectedRow:Array<any>){
+      this.selectedEvents = selectedRow;
       console.log('selectedRow', selectedRow)
     }
 

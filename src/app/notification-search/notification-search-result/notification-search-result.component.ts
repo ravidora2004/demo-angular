@@ -15,7 +15,7 @@ export class NotificationSearchResultComponent {
       this.weatherEventsList = _events;
       const selectedEvents = _events.filter((eventItem:weatherEventType) => eventItem.status.toLowerCase() === 'active');
       if(selectedEvents.length){
-        this.selected = selectedEvents
+        // this.selected = selectedEvents
       }
     }
   };

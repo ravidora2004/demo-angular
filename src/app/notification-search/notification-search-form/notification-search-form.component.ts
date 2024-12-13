@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { SearchForm } from '../../models/notification';
 
 @Component({
@@ -8,6 +8,7 @@ import { SearchForm } from '../../models/notification';
 })
 export class NotificationSearchFormComponent {
   @Output() onFormUpdate = new EventEmitter()
+  @Input() enableSave:boolean = false;
   notificationSearch:SearchForm={
     startDate:'',
     endDate:'',
@@ -27,6 +28,10 @@ export class NotificationSearchFormComponent {
     if(_form.valid){
       this.onFormUpdate.emit({form: _form.value, type:'search'})
     }
+  }
+
+  log(r:any){
+    console.log('asdfas', r)
   }
 
   // Trigger the close event, it can be redirect also
