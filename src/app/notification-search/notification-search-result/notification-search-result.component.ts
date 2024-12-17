@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { weatherEventType } from '../../models/notification';
 
 @Component({
@@ -6,17 +6,13 @@ import { weatherEventType } from '../../models/notification';
   templateUrl: './notification-search-result.component.html',
   styleUrl: './notification-search-result.component.css'
 })
-export class NotificationSearchResultComponent {
+export class NotificationSearchResultComponent implements OnInit {
   selected:Array<weatherEventType>=[];
   weatherEventsList:weatherEventType[] | null = null;
   @Output() onSelectChange = new EventEmitter();
   @Input() set weatherEvents(_events:weatherEventType[] | null){
     if(_events?.length && !this.weatherEventsList?.length){
       this.weatherEventsList = _events;
-      const selectedEvents = _events.filter((eventItem:weatherEventType) => eventItem.status.toLowerCase() === 'active');
-      if(selectedEvents.length){
-        // this.selected = selectedEvents
-      }
     }
   };
   
@@ -29,4 +25,11 @@ export class NotificationSearchResultComponent {
     this.onSelectChange.emit(this.selected)
   }
 
+  ngOnInit(){
+    if(this.weatherEventsList){
+      setTimeout(() => {
+        this.selected = this.weatherEventsList?.filter(weather => weather.status === 'active') || [];
+      }, 0);
+    }
+  }
 }

@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { SearchForm } from '../../models/notification';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'notification-search-form',
@@ -7,8 +8,12 @@ import { SearchForm } from '../../models/notification';
   styleUrl: './notification-search-form.component.css'
 })
 export class NotificationSearchFormComponent {
+  @ViewChild('notificationSearchform') form!: NgForm;
   @Output() onFormUpdate = new EventEmitter()
-  @Input() enableSave:boolean = false;
+  @Input() set buttonStatus(val:boolean){
+    this.enableSave = val
+  } 
+  enableSave:boolean = false;
   notificationSearch:SearchForm={
     startDate:'',
     endDate:'',
@@ -31,11 +36,22 @@ export class NotificationSearchFormComponent {
   }
 
   log(r:any){
-    console.log('asdfas', r)
+    console.log('Log in search form', r)
   }
 
   // Trigger the close event, it can be redirect also
   closeForm(){
     console.log("close event triggered")
+  }
+
+  ngAfterViewInit() {
+    // Listen for changes in the entire form
+    this.form.valueChanges?.subscribe((value) => {
+      Object.keys(value).forEach((formItem:string) =>{
+        if(value[formItem] !==''){
+          this.enableSave = true
+        }
+      })
+    });
   }
 }
