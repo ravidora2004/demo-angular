@@ -102,7 +102,7 @@
             <div class="clr-col-12 clr-col-md-8 req">
               <clr-date-container>
                 <label for="startDate" class="clr-col-12 clr-col-md-6">Start Date</label>
-                <input class="clr-col-12 clr-col-md-6" type="date" autocomplete="off" required clrDate id="startDate" name="frmStartDate" #frmStartDate="ngModel" [(ngModel)]="weatherAdd.frmStartDate" [ngModel]="weatherAdd.frmStartDate"  [ngModelOptions]="{ updateOn: 'change' }" 
+                <input class="clr-col-12 clr-col-md-6" type="date" autocomplete="off" required clrDate id="startDate" name="frmStartDate" #frmStartDate="ngModel" [(ngModel)]="weatherAdd.frmStartDate" [ngModelOptions]="{ updateOn: 'change' }" 
                 (keyup)="frmStartDate.control.setErrors(validateDate(frmStartDate.value))" >
                 <clr-control-error *ngIf="frmStartDate?.invalid && frmStartDate?.touched" >
                     <span *ngIf="frmStartDate?.errors?.['invalidDate']">Invalid data format</span>

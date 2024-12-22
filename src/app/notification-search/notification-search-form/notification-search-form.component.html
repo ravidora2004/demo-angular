@@ -7,14 +7,22 @@
         <div class="clr-col-12 clr-col-md-3 ">
             <clr-date-container>
                 <label for="startDatepickrnm" class="clr-col-12 clr-col-md-3">Start&nbsp;Date</label>
-                <input class="clr-col-12 clr-col-md-9" type="date" required clrDate id="startDatepickrnm" name="startDatepickrnm"#frmSrchStDt="ngModel" [(ngModel)]="notificationSearch.startDate" >
+                <input class="clr-col-12 clr-col-md-9" type="date" required clrDate id="startDatepickrnm" name="startDatepickrnm" #frmSrchStDt="ngModel" [(ngModel)]="notificationSearch.startDate"
+                (ngModelChange)="validateDates(notificationSearchform)">
             </clr-date-container>
+            <div *ngIf="frmSrchStDt.errors?.['invalidDate']" class="clr-col-12 text-danger">
+                Start date must be lesser than Start date.
+            </div>
         </div>
         <div class="clr-col-12 clr-col-md-3">
             <clr-date-container>
                 <label for="endDatepickrnm" class="clr-col-12 clr-col-md-3">End&nbsp;Date</label>
-                <input class="clr-col-12 clr-col-md-9" type="date" required clrDate id="endDatepickrnm" name="endDatepickrnm" #frmSrchEndDt="ngModel" [(ngModel)]="notificationSearch.endDate" >
+                <input class="clr-col-12 clr-col-md-9" type="date" required clrDate id="endDatepickrnm" name="endDatepickrnm" #frmSrchEndDt="ngModel" [(ngModel)]="notificationSearch.endDate"
+                (ngModelChange)="validateDates(notificationSearchform)">
             </clr-date-container>
+            <div *ngIf="frmSrchEndDt.errors?.['invalidDate']" class="clr-col-12 text-danger">
+                End date must be greater than Start date.
+            </div>
         </div>
         <div class="clr-col-12 clr-col-md-3">
             <clr-input-container>

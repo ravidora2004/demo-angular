@@ -44,6 +44,24 @@ export class NotificationSearchFormComponent {
     console.log("close event triggered")
   }
 
+  validateDates(form: NgForm) {
+    const startDateControl = form.controls['startDatepickrnm'];
+    const endDateControl = form.controls['endDatepickrnm'];
+    
+    if (this.notificationSearch.startDate && this.notificationSearch.endDate) {
+      const startDate = new Date(this.notificationSearch.startDate).getTime();
+      const endDate = new Date(this.notificationSearch.endDate).getTime();
+      // Set custom error if the start date is after the end date
+      if (startDate > endDate) {
+        endDateControl.setErrors({ invalidDate: true });
+        startDateControl.setErrors({ invalidDate: true });
+      } else {
+        // Clear the error if validation passes
+        endDateControl.setErrors(null);
+      }
+    }
+  }
+
   ngAfterViewInit() {
     // Listen for changes in the entire form
     this.form.valueChanges?.subscribe((value) => {
